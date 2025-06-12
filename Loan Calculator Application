@@ -1,0 +1,29 @@
+def calculate_loan(loan_amount, annual_interest_rate, loan_term_years):
+    monthly_interest_rate = annual_interest_rate / 100 / 12
+    number_of_payments = loan_term_years * 12
+
+    if monthly_interest_rate == 0:
+        monthly_payment = loan_amount / number_of_payments
+    else:
+        monthly_payment = loan_amount * monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** -number_of_payments)
+
+    total_payment = monthly_payment * number_of_payments
+    total_interest = total_payment - loan_amount
+
+    return monthly_payment, total_payment, total_interest
+
+def main():
+    print("💰 Loan Calculator")
+    loan_amount = float(input("Enter the loan amount (₹): "))
+    annual_interest_rate = float(input("Enter the annual interest rate (%): "))
+    loan_term_years = int(input("Enter the loan term (in years): "))
+
+    monthly, total, interest = calculate_loan(loan_amount, annual_interest_rate, loan_term_years)
+
+    print("\n📊 Loan Summary:")
+    print(f"Monthly Payment: ₹{monthly:,.2f}")
+    print(f"Total Payment: ₹{total:,.2f}")
+    print(f"Total Interest Paid: ₹{interest:,.2f}")
+
+if __name__ == "__main__":
+    main()
